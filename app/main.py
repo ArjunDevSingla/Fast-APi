@@ -78,7 +78,7 @@ def retrieve_post(id: str):
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_posts(id: str):
-    cursor.execute(f"""DELETE FROM posts WHERE id = {id} RETURNING *""")
+    cursor.execute("""DELETE FROM posts WHERE id = {0} RETURNING *""".format(id))
     post = cursor.fetchone()
     conn.commit()
     if not post:
